@@ -1,0 +1,23 @@
+grammar_inputs = ["S-aABc", "A=b", "B=#"]
+first = "ab#"
+follow = '##c'
+non_terminals = []
+terminals = []
+# extracting terminlas and non terminals
+for i in range(len(grammar_inputs)):
+    for j in grammar_inputs[i]:
+        if j.isupper() and j not in non_terminals:
+            non_terminals.append(j)
+        elif(j.islower() or j == '#') and j not in terminals:
+            terminals.append(j)
+# printing op
+for i in range(len(non_terminals)):
+    for j in range(len(terminals)):
+        if first[i] == terminals[j]:
+            if terminals[j] == '#':
+                print(
+                    f"[{non_terminals[i]},{follow[non_terminals.index(non_terminals[i])]}]=({non_terminals[i]}=>{grammar_inputs[i][2:]})")
+            else:
+                print(
+                    f"[{non_terminals[i]},{terminals[j]}]=({non_terminals[1]}=>{grammar_inputs[i][2:]})")
+
